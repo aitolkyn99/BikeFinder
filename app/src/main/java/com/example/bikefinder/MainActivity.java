@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
+    DatabaseHandler myDb;
 
     Sensor sensor;
     TextView text;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myDb = new DatabaseHandler(this);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
