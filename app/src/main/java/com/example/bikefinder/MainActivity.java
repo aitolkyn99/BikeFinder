@@ -2,13 +2,16 @@ package com.example.bikefinder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
 
 import android.hardware.SensorManager;
 import android.hardware.SensorEventListener;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,17 +42,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
 
         listView.setAdapter(arrayAdapter);
-//        String myurl = "file:///android_asset/index.html";
-//        WebView view =(WebView) this.findViewById(R.id.webView);
-//        view.getSettings().setJavaScriptEnabled(true);
-//        view.loadUrl(myurl);
 
-
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    Intent intent = new Intent(view.getContext(), MapsActivity.class);
+                    startActivityForResult(intent,0);
+                }
+                if (position == 1) {
+                    Intent intent = new Intent(view.getContext(), MapsActivity2.class);
+                    startActivityForResult(intent,1);
+                }
+                if (position == 2) {
+                    Intent intent = new Intent(view.getContext(), MapsActivity.class);
+                    startActivityForResult(intent,2);
+                }
+            }
+        });
     }
 
     @Override
